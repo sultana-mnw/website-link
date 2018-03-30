@@ -1,0 +1,32 @@
+project setup 
+
+1>mkdir ex
+2>cd ex
+3>truffle init
+4>npm init -y
+5>npm i -D -g truffle
+6>npm init -y
+7>npm i -D webpack react react-dom babel-core babel-loader babel-preset-react babel-preset-env css-loader style-loader json-loader
+8>npm i -g http-server
+9>npm install web3@0.19
+10>truffle.cmd compile
+truffle.cmd migrate
+
+11> to see output in web server:
+http-server -a localhost -p 8080 -c-1
+
+{truffle build
+truffle compile
+11>truffle migrate
+}
+
+
+test rpc installation
+1>npm install -g ethereumjs-testrpc
+2>testrpc
+3>ctrl+ c
+
+
+
+https://medium.com/@merunasgrincalaitis/the-ultimate-end-to-end-tutorial-to-create-and-deploy-a-fully-descentralized-dapp-in-ethereum-18f0cf6d7e0e
+https://medium.com/@VladimirTikhomirov/how-its-made-crowdsale-contract-1120b487cc4a

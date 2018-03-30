@@ -1,0 +1,8 @@
+ address contractAddress;
+   FundToken public Token;
+    function DMF(address na){
+         Token=new FundToken();
+        contractAddress=na;
+    }
+
+FundToken(contractAddress).balanceof();

@@ -1,0 +1,20 @@
+before visual studio and npm and node
+
+ install
+1>npm install -g typescript
+2>compile
+  tsc helo.ts
+3> npm install -g @angular/cli
+
+4>ng help
+
+ng new newprojectname
+cd newprojectname
+ng serve
+
+
+
+
+tetstrpc 
+
+first run nit then change metamask localhost after import accoun then normal web 3 proc 

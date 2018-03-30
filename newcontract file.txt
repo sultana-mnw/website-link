@@ -1,0 +1,144 @@
+
+pragma solidity ^0.4.0;
+import "./ERC20.sol";
+contract FundToken is ERC20Basic
+{
+    string standard="Token 1.0";
+    string public name;
+    string public symbol;
+    uint256 public totalsupply;
+    uint256  initialallowed;
+    uint256 public decimals;
+    address Owner;
+
+    mapping(address=>uint) public balance;
+    mapping(address=>mapping(address=>uint256))public allowed;
+
+    function FundToken()public
+    {
+        totalsupply=10000;
+        balance[msg.sender]=totalsupply;
+        symbol="$";
+        name="DMF";
+        initialallowed=500;
+        decimals=0;
+        Owner = msg.sender;
+        
+    }
+    function transferFrom(address from, address to, uint256 value)public returns(bool) 
+    {
+        //require(to != address(0));
+       //require(value <= balanceOf[from]);
+        //require(value <= allowed[from][msg.sender]);
+    
+        balance[from]=balance[from]-value;
+        balance[to] =balance[to]+value;
+        //allowed[from][msg.sender] = allowed[from][msg.sender]-(value);
+        Transfer(from,to,value);
+        return true;
+    }
+    
+    function allowance(address _owner, address _to) public view returns (uint256) 
+    {
+        return allowed[_owner][_to];
+    }
+    function increaseApproval(address _to, uint value) public returns(bool)
+    {
+        allowed[msg.sender][_to]=allowed[msg.sender][_to]+(value);
+        return true;
+    }
+    function decreaseApproval(address _to, uint value) public returns(bool)
+    {
+        allowed[msg.sender][_to]=allowed[msg.sender][_to]-(value);
+        return true;
+    }
+    function approve(address spender, uint256 value) public returns (bool)
+    {
+        allowed[msg.sender][spender]=value;
+        return true;
+    }
+    
+    function transfer(address to, uint256 value) public returns (bool)
+    {
+        require(value<=balance[msg.sender]);
+        balance[msg.sender]=balance[msg.sender]-value;
+        balance[to]=balance[to]+value;
+        Transfer(msg.sender,to,value);
+        return true;
+    }
+    function totalSupply() public view returns (uint256)
+    {
+       return totalsupply;
+    }
+    function balanceOf(address _addr) public view returns (uint256)
+    {
+        return balance[_addr];
+    }
+    
+ 
+   
+   
+    function buytokens() public payable {
+       
+     //calculate the tokens per rate form user entered amount
+    
+    //Dostrix Tokens are minted by following way
+    
+    Transfer(0,msg.sender,msg.value);
+
+    
+   }
+                       
+}
+
+contract DMF{
+   address contractAddress;
+   FundToken public Token;
+    function DMF(address na){
+         Token=new FundToken();
+        contractAddress=na;
+    }
+    mapping(address=>uint256)public balance;
+  
+        address owner;
+        uint256 rate = 0.001 ether;
+
+                       //Phase -2
+            
+            struct PortfolioMFTK
+            {
+                address portfolioM;
+                //address contractAdd;
+                uint256 Eth;
+            }
+      mapping(address => PortfolioMFTK) public BuyTK;
+      function () public payable{
+          
+      }
+      
+        function PortfolioReg() public payable{
+            BuyTK[msg.sender].portfolioM=msg.sender;
+            BuyTK[msg.sender].Eth=BuyTK[msg.sender].Eth + msg.value;
+         
+            GetFundToken(msg.value);
+        }
+         function GetFundToken(uint256 value) public returns(uint256){
+            uint256 tokens = value / rate;
+            Token.transfer(msg.sender,tokens);
+         balance[msg.sender]=balance[msg.sender]+tokens;
+           FundToken(contractAddress).balanceOf(msg.sender);
+           //=FundToken(contractAddress).balanceOf(msg.sender)+tokens;
+                return tokens;
+           
+         }
+
+      function GetBal()public view returns(uint256){
+        uint256 a=Token.balanceOf(msg.sender); //one is using additinaol variable; to call tha functiom
+        return a;
+        
+        
+        //  return this.balance/ 1 ether; //converting wei value to ether
+      }
+  
+
+}
